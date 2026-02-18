@@ -25,6 +25,9 @@ def _require(key: str) -> str:
     return value
 
 
+# ─── Anthropic (OpenClaw / ClawBot) ──────────────────────────────────────────
+ANTHROPIC_API_KEY: str = _require("ANTHROPIC_API_KEY")
+
 # ─── Google Gemini ────────────────────────────────────────────────────────────
 GEMINI_API_KEY: str = _require("GEMINI_API_KEY")
 
