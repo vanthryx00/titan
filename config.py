@@ -44,6 +44,11 @@ DISCORD_WEBHOOK_URL: str | None = os.getenv("DISCORD_WEBHOOK_URL")
 # ─── GitHub ───────────────────────────────────────────────────────────────────
 GITHUB_TOKEN: str | None = os.getenv("GITHUB_TOKEN")
 
+# ─── Supabase ─────────────────────────────────────────────────────────────────
+SUPABASE_URL: str = os.getenv("SUPABASE_URL", "https://occgwktryhynxonuyixm.supabase.co")
+SUPABASE_ANON_KEY: str = _require("SUPABASE_ANON_KEY")
+SUPABASE_PUBLISHABLE_KEY: str | None = os.getenv("SUPABASE_PUBLISHABLE_KEY")
+
 # ─── App ──────────────────────────────────────────────────────────────────────
 APP_ENV: str = os.getenv("APP_ENV", "development")
 LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
