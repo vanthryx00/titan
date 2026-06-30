@@ -26,7 +26,7 @@ def _require(key: str) -> str:
 
 
 # ─── Google Gemini ────────────────────────────────────────────────────────────
-GEMINI_API_KEY: str = _require("GEMINI_API_KEY")
+GEMINI_API_KEY: str | None = os.getenv("GEMINI_API_KEY")
 
 # ─── Database ─────────────────────────────────────────────────────────────────
 DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql://localhost:5432/bugreaper")
