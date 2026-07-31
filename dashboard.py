@@ -252,7 +252,7 @@ def main() -> None:
                         pass
                     time.sleep(30)
                     # Simpler: just clear and reprint
-                    os.system("clear")
+                    os.system("cls" if os.name == "nt" else "clear")
                     render(get_stats())
         except KeyboardInterrupt:
             pass

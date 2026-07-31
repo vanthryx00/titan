@@ -517,11 +517,13 @@ def email_report(pdf_path: str, to_email: str, business_name: str, domain: str) 
 
     print(f"Report emailed to {to_email}")
 
-    # Clean up temp file
-    try:
-        os.unlink(pdf_path)
-    except Exception:
-        pass
+    # Clean up temp file (retry for Windows Defender advisory locks)
+    for _ in range(3):
+        try:
+            os.unlink(pdf_path)
+            break
+        except OSError:
+            time.sleep(0.5)
 
 
 if __name__ == "__main__":

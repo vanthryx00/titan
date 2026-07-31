@@ -5,6 +5,9 @@ Run this daily via cron at 9am:
   python sequences.py
   python sequences.py --dry-run
 
+Windows (Task Scheduler):
+  schtasks /create /tn "BugReaper Sequences" /tr "python sequences.py" /sc daily /st 09:00
+
 Checks lead_pipeline for records where follow_up_due_date <= now()
 and sequence_complete = false, then sends the appropriate follow-up email.
 

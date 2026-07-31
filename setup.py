@@ -508,10 +508,19 @@ def show_next_steps() -> None:
         f"  python dashboard.py --watch\n\n"
         "[bold white]Stripe webhook server:[/bold white]\n"
         f"  python webhook.py\n\n"
-        "[bold white]Cron setup (add to crontab -e):[/bold white]\n"
-        f"  0 8 * * *  cd {cwd} && python pipeline.py --limit 20\n"
-        f"  0 9 * * *  cd {cwd} && python sequences.py\n"
-        f"  @reboot    cd {cwd} && python webhook.py &",
+        + (
+            "[bold white]Task Scheduler (run once in Admin PowerShell):[/bold white]\n"
+            f'  schtasks /create /tn "BugReaper Pipeline"  /tr "python {cwd}\\pipeline.py --limit 20" /sc daily /st 08:00\n'
+            f'  schtasks /create /tn "BugReaper Sequences" /tr "python {cwd}\\sequences.py" /sc daily /st 09:00\n'
+            f'  schtasks /create /tn "BugReaper Webhook"   /tr "pythonw {cwd}\\webhook.py" /sc onlogon\n\n'
+            "[dim]Windows Firewall will prompt to allow port 8080 on first run.\n"
+            "Or pre-allow: netsh advfirewall firewall add rule name=\"BugReaper Webhook\" dir=in action=allow protocol=TCP localport=8080[/dim]"
+            if os.name == "nt" else
+            "[bold white]Cron setup (add to crontab -e):[/bold white]\n"
+            f"  0 8 * * *  cd {cwd} && python pipeline.py --limit 20\n"
+            f"  0 9 * * *  cd {cwd} && python sequences.py\n"
+            f"  @reboot    cd {cwd} && python webhook.py &"
+        ),
         title="[bold green]🚀 Next Steps[/bold green]",
         border_style="green",
         padding=(1, 3),
